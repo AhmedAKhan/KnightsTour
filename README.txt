@@ -1,1 +1,2 @@
-this is just a test to check if it works
+The Code is well commented and should be easy to follow. 
+
