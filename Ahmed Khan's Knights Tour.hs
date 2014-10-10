@@ -6,7 +6,7 @@ import Graphics.Gloss -- imports gloss
 --this code is abstract and will work for an n number of tiles, change the variable tileLengthOfBoard to change the length of the board
 
 --declares all the necessary variables
-tileLengthOfBoard = 9 -- the length of the board measured with the number of tiles
+tileLengthOfBoard = 8 -- the length of the board measured with the number of tiles
 tileLengthOfBoardAsFloat :: Float
 tileLengthOfBoardAsFloat = fromIntegral tileLengthOfBoard :: Float
 totalTiles :: Int --the total amount of tiles on the board
