@@ -1,7 +1,6 @@
 package Model.WanrersRule;
 
 import Model.Model;
-import javafx.geometry.Pos;
 
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -19,6 +18,7 @@ public class WarnsdorffRule implements Model{
     }
 
     private void findPath(){
+        //all the corners have the least possible moves at the begining so its going to chose that
         for(int startRow = 0; startRow < positions.length; startRow++){
             for(int startCol = 0; startCol < positions[startRow].length; startCol++){
                 positions[startRow][startCol] = 1;
