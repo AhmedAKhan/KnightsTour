@@ -1,4 +1,5 @@
 import Model.Model;
+import Model.UsingGraphs.Graphs;
 import Model.WanrersRule.WarnsdorffRule;
 import Model.WorstCase.WorstCase;
 
@@ -32,7 +33,7 @@ public class Main {
             return;
         }
 
-        Model model = new WarnsdorffRule(rows, cols);
+        Model model = new Graphs(rows, cols);//new WarnsdorffRule(rows, cols);
 //        if(args.length >= 3) model = new WorstCase(rows, cols, args[2]);
 //        else  model = new WorstCase(rows, cols);
         int largestIntegerSize = String.valueOf(rows * cols).length();

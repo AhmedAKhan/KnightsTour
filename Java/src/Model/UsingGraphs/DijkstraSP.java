@@ -1,4 +1,4 @@
-package Model; /*************************************************************************
+package Model.UsingGraphs; /*************************************************************************
  *  Compilation:  javac Module.DijkstraSP.java
  *  Execution:    java Module.DijkstraSP input.txt s
  *  Dependencies: Module.EdgeWeightedDigraph.java Module.IndexMinPQ.java Stack.java Module.DirectedEdge.java

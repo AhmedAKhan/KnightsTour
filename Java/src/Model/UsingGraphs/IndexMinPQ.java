@@ -1,4 +1,4 @@
-package Model; /*************************************************************************
+package Model.UsingGraphs; /*************************************************************************
  *  Compilation:  javac Module.IndexMinPQ.java
  *  Execution:    java Module.IndexMinPQ
  *

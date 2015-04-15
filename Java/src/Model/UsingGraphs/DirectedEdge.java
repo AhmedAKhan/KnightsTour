@@ -1,10 +1,11 @@
-package Model; /*************************************************************************
+package Model.UsingGraphs; /*************************************************************************
  *  Compilation:  javac Module.DirectedEdge.java
  *  Execution:    java Module.DirectedEdge
  *
  *  Immutable weighted directed edge.
  *
  *************************************************************************/
+
 /**
  *  The <tt>Module.DirectedEdge</tt> class represents a weighted edge in an
  *  {@link EdgeWeightedDigraph}. Each edge consists of two integers

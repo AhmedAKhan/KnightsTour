@@ -10,7 +10,6 @@ public class WarnsdorffRule implements Model{
     private int[][] positions;
     private boolean finished;
 
-
     public WarnsdorffRule(int row, int col){
         positions = new int[row][col];
         finished = false;
@@ -59,7 +58,6 @@ public class WarnsdorffRule implements Model{
     }
 
     private Position getTheIthBestPosition(int row, int col, int ithPosition){
-//        Position[] allPossiblePositions = new Position[8];
         PriorityQueue<Position> allPossiblePositions = new PriorityQueue<Position>();
         for(int i = 0; i < 8; i++){
             Position currentPosition = getPositionAt(row, col, i);
