@@ -4,15 +4,24 @@ import Model.Model;
 
 public class WorstCase implements Model{
 
-    int[][] positions;
+    private int[][] positions;
+    private boolean finished;
 
     public WorstCase(int row, int col){
         positions = new int[row][col];
+        finished = false;
         findPath();
     }
 
     private void findPath(){
-
+        for(int startRow = 0; startRow < positions.length; startRow++){
+            for(int startCol = 0; startCol < positions[startRow].length; startCol++){
+                positions[startRow][startCol] = 1;
+                findPath(startRow, startCol, 2);
+                if(finished) return;
+                positions[startRow][startCol] = 0;
+            }
+        }
     }
     private void findPath(int row, int col, int totalTurns){
 
@@ -20,20 +29,26 @@ public class WorstCase implements Model{
             //get next position
             Position currentPosition = getPositionAt(row, col, turnsInSpot);
 
-            //check if position is out of bounds
-            if(!isInBounds(currentPosition)) continue;
-            //check if is empty
-            if(positions[currentPosition.row][currentPosition.col] != 0) continue;
+            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
+            if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
 
-            positions[currentPosition.row][currentPosition.col] = totalTurns+1;
+            positions[currentPosition.row][currentPosition.col] = totalTurns;
 
             //base case
-            if(totalTurns >= positions.length*positions[0].length) return;
+            if(totalTurns >= positions.length*positions[0].length){
+                finished = true;
+                return;
+            }
+            findPath(currentPosition.row, currentPosition.col, totalTurns+1);
+
+            if(finished) return;
+
+            positions[currentPosition.row][currentPosition.col] = 0;
         }
     }
     private boolean isInBounds(Position position){
         if(position.row < 0 || position.col < 0) return false;
-        if(position.row > positions.length || position.col > positions[position.row].length) return false;
+        if(position.row >= positions.length || position.col >= positions[position.row].length) return false;
         return true;
     }
 

@@ -32,7 +32,9 @@ public class Main {
         for(int c1 = 0; c1 < rows; c1++){
             result += "|";
             for(int c2 = 0; c2 < cols; c2++){
-                result += model.getValueAtPosition(c1, c2)+"|";
+                String value = String.valueOf(model.getValueAtPosition(c1, c2));
+                while (value.length() < 3)  value = value+ " ";
+                result += value+"|";
             }
             result += "\n";
         }
