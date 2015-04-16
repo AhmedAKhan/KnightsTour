@@ -1,3 +1,4 @@
+package Model.UsingGraphs;
 /*************************************************************************
  *  Compilation:  javac BellmanFordSP.java
  *  Execution:    java BellmanFordSP filename.txt s
@@ -27,7 +28,9 @@
  *
  *************************************************************************/
 
-import Model.UsingGraphs.DirectedEdge;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  *  The <tt>BellmanFordSP</tt> class represents a data type for solving the
@@ -75,11 +78,11 @@ public class BellmanFordSP {
         distTo[s] = 0.0;
 
         // Bellman-Ford algorithm
-        queue = new Queue<Integer>();
-        queue.enqueue(s);
+        queue = new LinkedList<Integer>();
+        queue.add(s);
         onQueue[s] = true;
         while (!queue.isEmpty() && !hasNegativeCycle()) {
-            int v = queue.dequeue();
+            int v = queue.poll();
             onQueue[v] = false;
             relax(G, v);
         }
@@ -95,7 +98,7 @@ public class BellmanFordSP {
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
                 if (!onQueue[w]) {
-                    queue.enqueue(w);
+                    queue.add(w);
                     onQueue[w] = true;
                 }
             }
@@ -237,8 +240,8 @@ public class BellmanFordSP {
             }
         }
 
-        StdOut.println("Satisfies optimality conditions");
-        StdOut.println();
+        System.out.println("Satisfies optimality conditions");
+        System.out.println();
         return true;
     }
 
@@ -246,30 +249,38 @@ public class BellmanFordSP {
      * Unit tests the <tt>BellmanFordSP</tt> data type.
      */
     public static void main(String[] args) {
-        In in = new In(args[0]);
-        int s = Integer.parseInt(args[1]);
-        EdgeWeightedDigraph G = new EdgeWeightedDigraph(in);
+        //makes an empty graph and makes edges
+        EdgeWeightedDigraph G = new EdgeWeightedDigraph(5);
+        //adds the edges to the graph
+        G.addEdge(new DirectedEdge(0,1,1));
+        G.addEdge(new DirectedEdge(1,2,1));
+        G.addEdge(new DirectedEdge(2,3,1));
+        G.addEdge(new DirectedEdge(3,4,1));
+        G.addEdge(new DirectedEdge(4,1,1));
+        G.addEdge(new DirectedEdge(4,2,1));
 
-        BellmanFordSP sp = new BellmanFordSP(G, s);
+
+        int s = 0; // source
+        BellmanFordSP sp = new BellmanFordSP(G, 0);
 
         // print negative cycle
         if (sp.hasNegativeCycle()) {
             for (DirectedEdge e : sp.negativeCycle())
-                StdOut.println(e);
+                System.out.println(e);
         }
 
         // print shortest paths
         else {
             for (int v = 0; v < G.V(); v++) {
                 if (sp.hasPathTo(v)) {
-                    StdOut.printf("%d to %d (%5.2f)  ", s, v, sp.distTo(v));
+                    System.out.printf("%d to %d (%5.2f)  ", s, v, sp.distTo(v));
                     for (DirectedEdge e : sp.pathTo(v)) {
-                        StdOut.print(e + "   ");
+                        System.out.print(e + "   ");
                     }
-                    StdOut.println();
+                    System.out.println();
                 }
                 else {
-                    StdOut.printf("%d to %d           no path\n", s, v);
+                    System.out.printf("%d to %d           no path\n", s, v);
                 }
             }
         }

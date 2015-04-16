@@ -2,9 +2,6 @@ package Model.UsingGraphs;
 
 import Model.Model;
 
-import java.util.Iterator;
-import java.util.PriorityQueue;
-
 public class Graphs implements Model{
 
     private int[][] positions;
@@ -24,6 +21,5 @@ public class Graphs implements Model{
             //
     }
 
-    @Override
-    public int getValueAtPosition(int row, int col) { return positions[row][col]; }
+    @Override public int getValueAtPosition(int row, int col) { return positions[row][col]; }
 }

@@ -1,41 +1,60 @@
-package Model.WanrersRule;
+package Model.OptimizedWarnersRule;
 
 import Model.Model;
 
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-public class WarnsdorffRule implements Model{
+public class OptimizedWarnersRule implements Model{
 
-    private int[][] positions;
+    private Integer[][] positions;
     private boolean finished;
 
-    public WarnsdorffRule(int row, int col){
-        positions = new int[row][col];
+    public OptimizedWarnersRule(int row, int col){
+        positions = new Integer[row][col];
         finished = false;
         findPath();
     }
 
     private void findPath(){
+        positions[0][0] = 0;
+        positions[2][1] = 1;
+        positions[1][2] = -1;
+        findPath(new Position(2,1), 0, new Position(1,2), 0);
         //all the corners have the least possible moves at the begining so its going to chose that
-        for(int startRow = 0; startRow < positions.length; startRow++){
-            for(int startCol = 0; startCol < positions[startRow].length; startCol++){
-                positions[startRow][startCol] = 1;
-                findPath(startRow, startCol, 2);
-                if(finished) return;
-                positions[startRow][startCol] = 0;
-            }
-        }
+//        for(int startRow = 0; startRow < positions.length; startRow++){
+//            for(int startCol = 0; startCol < positions[startRow].length; startCol++){
+//                positions[startRow][startCol] = 1;
+//                findPath(startRow, startCol, 2);
+//                if(finished) return;
+//                positions[startRow][startCol] = null;
+//            }
+//        }
     }
-    private void findPath(int row, int col, int totalTurns){
+    private void findPath(Position p1, int c1, Position p2, int c2){
+        Position bestPositionFromP1 = getTheIthBestPosition(p1.row, p1.col, c1);
+        Position bestPositionFromP2 = getTheIthBestPosition(p2.row, p2.col, c2);
+
+        Position currentPosition = bestPositionFromP1;
+        if(bestPositionFromP1 == null && bestPositionFromP2 == null) return;
+        else if(bestPositionFromP1 == null) currentPosition = bestPositionFromP2;
+        else if(bestPositionFromP2 == null) currentPosition = bestPositionFromP1;
+        else if(bestPositionFromP1.numberOfPossibleMoves() > bestPositionFromP2.numberOfPossibleMoves()) currentPosition = bestPositionFromP2;
+
+//        if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
+
+
+
+    }
+    /*private void findPath(int row, int col, int totalTurns){
 
         for(int turnsInSpot = 0; turnsInSpot < 8; turnsInSpot++){
             //get next position
             Position currentPosition = getTheIthBestPosition(row, col, turnsInSpot);
 
             if(currentPosition == null) continue;
-            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
-            if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
+//            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
+            if(positions[currentPosition.row][currentPosition.col] != null) continue; //check if is empty
 
             positions[currentPosition.row][currentPosition.col] = totalTurns;
 
@@ -47,10 +66,9 @@ public class WarnsdorffRule implements Model{
             findPath(currentPosition.row, currentPosition.col, totalTurns+1);
 
             if(finished) return;
-
-            positions[currentPosition.row][currentPosition.col] = 0;
+            positions[currentPosition.row][currentPosition.col] = null;
         }
-    }
+    }*/
     private boolean isInBounds(Position position){
         if(position.row < 0 || position.col < 0) return false;
         if(position.row >= positions.length || position.col >= positions[position.row].length) return false;
@@ -58,9 +76,12 @@ public class WarnsdorffRule implements Model{
     }
 
     private Position getTheIthBestPosition(int row, int col, int ithPosition){
+
         PriorityQueue<Position> allPossiblePositions = new PriorityQueue<Position>();
         for(int i = 0; i < 8; i++){
             Position currentPosition = getPositionAt(row, col, i);
+            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
+            if(positions[currentPosition.row][currentPosition.col] != null) continue; //check if is empty
             allPossiblePositions.add(currentPosition);
         }
 
@@ -86,7 +107,7 @@ public class WarnsdorffRule implements Model{
             for(int i =0; i < 8; i++){
                 Position currentPosition = getPositionAt(row, col, i);
                 if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
-                if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
+                if(positions[currentPosition.row][currentPosition.col] != null) continue; //check if is empty
                 result++;
             }
             return result;
