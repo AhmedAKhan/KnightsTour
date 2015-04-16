@@ -1,8 +1,5 @@
 import Model.Model;
-import Model.OptimizedWarnersRule.OptimizedWarnersRule;
-import Model.UsingGraphs.Graphs;
 import Model.WanrersRule.WarnsdorffRule;
-import Model.WorstCase.WorstCase;
 
 public class Main {
 
@@ -34,7 +31,7 @@ public class Main {
             return;
         }
 
-        Model model = new Graphs(rows, cols);
+        Model model; //= new Graphs(rows, cols);
         model = new WarnsdorffRule(rows, cols);
 //        if(args.length >= 3) model = new WorstCase(rows, cols, args[2]);
 //        else  model = new WorstCase(rows, cols);

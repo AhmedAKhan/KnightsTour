@@ -33,9 +33,9 @@ public class WarnsdorffRule implements Model{
             //get next position
             Position currentPosition = getTheIthBestPosition(row, col, turnsInSpot);
 
-            if(currentPosition == null) continue;
-            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
-            if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
+//            if(currentPosition == null) continue;
+//            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
+//            if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
 
             positions[currentPosition.row][currentPosition.col] = totalTurns;
 
@@ -61,6 +61,9 @@ public class WarnsdorffRule implements Model{
         PriorityQueue<Position> allPossiblePositions = new PriorityQueue<Position>();
         for(int i = 0; i < 8; i++){
             Position currentPosition = getPositionAt(row, col, i);
+            if(currentPosition == null) continue;
+            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
+            if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
             allPossiblePositions.add(currentPosition);
         }
 
