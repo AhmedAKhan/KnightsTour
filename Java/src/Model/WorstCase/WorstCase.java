@@ -73,7 +73,7 @@ public class WorstCase implements Model{
     }
 
     @Override
-    public int getValueAtPosition(int row, int col) {
-        return positions[row][col];
+    public String getValueAtPosition(int row, int col) {
+        return String.valueOf(positions[row][col]);
     }
 }//end class

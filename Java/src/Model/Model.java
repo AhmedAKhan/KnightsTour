@@ -2,6 +2,6 @@ package Model;
 
 public interface Model{
 
-    public int getValueAtPosition(int row, int col);
+    public String getValueAtPosition(int row, int col);
 
 }

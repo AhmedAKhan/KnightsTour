@@ -21,5 +21,5 @@ public class Graphs implements Model{
             //
     }
 
-    @Override public int getValueAtPosition(int row, int col) { return positions[row][col]; }
+    @Override public String getValueAtPosition(int row, int col) { return String.valueOf(positions[row][col]); }
 }

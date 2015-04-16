@@ -33,10 +33,6 @@ public class WarnsdorffRule implements Model{
             //get next position
             Position currentPosition = getTheIthBestPosition(row, col, turnsInSpot);
 
-//            if(currentPosition == null) continue;
-//            if(!isInBounds(currentPosition)) continue; //check if position is out of bounds
-//            if(positions[currentPosition.row][currentPosition.col] != 0) continue; //check if is empty
-
             positions[currentPosition.row][currentPosition.col] = totalTurns;
 
             //base case
@@ -119,8 +115,7 @@ public class WarnsdorffRule implements Model{
     }
 
     @Override
-    public int getValueAtPosition(int row, int col) {
-        return positions[row][col];
+    public String getValueAtPosition(int row, int col) { return String.valueOf(positions[row][col]);
     }
 
 }

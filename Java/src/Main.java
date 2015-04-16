@@ -1,4 +1,6 @@
 import Model.Model;
+import Model.OptimizedWarnersRule.OptimizedWarnersRule;
+import Model.UsingGraphs.Graphs;
 import Model.WanrersRule.WarnsdorffRule;
 
 public class Main {
@@ -31,16 +33,17 @@ public class Main {
             return;
         }
 
-        Model model; //= new Graphs(rows, cols);
-        model = new WarnsdorffRule(rows, cols);
+        Model model = new OptimizedWarnersRule(rows, cols);
+//        model = new WarnsdorffRule(rows, cols);
 //        if(args.length >= 3) model = new WorstCase(rows, cols, args[2]);
 //        else  model = new WorstCase(rows, cols);
         int largestIntegerSize = String.valueOf(rows * cols).length();
+        if(largestIntegerSize < 4) largestIntegerSize =4;
         String result = "";
         for(int c1 = 0; c1 < rows; c1++){
             result += "|";
             for(int c2 = 0; c2 < cols; c2++){
-                String value = String.valueOf(model.getValueAtPosition(c1, c2));
+                String value = model.getValueAtPosition(c1, c2);
                 while (value.length() < largestIntegerSize)  value = value+ " ";
                 result += value+"|";
             }
